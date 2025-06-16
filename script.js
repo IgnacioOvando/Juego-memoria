@@ -1,7 +1,8 @@
 const emojis = ['🍕', '🍔', '🍟', '🌮', '🍩', '🍪', '🍉', '🍓'];
-let cards = [...emojis, ...emojis]; // Duplicar para tener pares
+let cards = [...emojis, ...emojis]; // 8 pares
 let revealedCards = [];
 let matchedPairs = 0;
+let attempts = 0;
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -11,9 +12,23 @@ function shuffle(array) {
   return array;
 }
 
+function startGame() {
+  document.getElementById('welcome-screen').style.display = 'none';
+  document.getElementById('game-container').style.display = 'block';
+  createBoard();
+}
+
 function createBoard() {
   const gameBoard = document.getElementById('gameBoard');
+  const message = document.getElementById('message');
+  const attemptsDisplay = document.getElementById('attempts');
+
   gameBoard.innerHTML = '';
+  message.innerText = '';
+  attempts = 0;
+  matchedPairs = 0;
+  revealedCards = [];
+  attemptsDisplay.innerText = attempts;
   shuffle(cards);
 
   cards.forEach((emoji, index) => {
@@ -39,6 +54,8 @@ function revealCard(card) {
   revealedCards.push(card);
 
   if (revealedCards.length === 2) {
+    attempts++;
+    document.getElementById('attempts').innerText = attempts;
     setTimeout(checkMatch, 700);
   }
 }
@@ -51,7 +68,7 @@ function checkMatch() {
     card2.classList.add('matched');
     matchedPairs++;
     if (matchedPairs === emojis.length) {
-      document.getElementById('message').innerText = '¡Ganaste!';
+      document.getElementById('message').innerText = `¡Ganaste en ${attempts} intentos! 🎉`;
     }
   } else {
     card1.classList.remove('revealed');
@@ -62,5 +79,3 @@ function checkMatch() {
 
   revealedCards = [];
 }
-
-createBoard();
