@@ -3,13 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Juego de Memoria</title>
+  <title>Memorama Express</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Juego de Memoria</h1>
-  <div class="game-board" id="gameBoard"></div>
-  <p id="message"></p>
+  <div id="welcome-screen">
+    <h1>🎯 Memorama Express</h1>
+    <p>¿Estás listo para poner a prueba tu memoria?</p>
+    <button onclick="startGame()">Comenzar</button>
+  </div>
+
+  <div id="game-container" style="display:none;">
+    <h1>🎯 Memorama Express</h1>
+    <p>Intentos: <span id="attempts">0</span></p>
+    <div class="game-board" id="gameBoard"></div>
+    <p id="message"></p>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
